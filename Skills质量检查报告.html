@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills 质量检查工作总结</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+            line-height: 1.6;
+            color: #24292e;
+            background-color: #f6f8fa;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #0366d6;
+            border-bottom: 3px solid #0366d6;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        h2 {
+            color: #24292e;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 8px;
+        }
+        
+        h3 {
+            color: #0366d6;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        h4 {
+            color: #586069;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .meta {
+            background-color: #f6f8fa;
+            padding: 15px;
+            border-left: 4px solid #0366d6;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .meta strong {
+            color: #0366d6;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #e1e4e8;
+        }
+        
+        th {
+            background-color: #f6f8fa;
+            font-weight: 600;
+            color: #24292e;
+        }
+        
+        tr:hover {
+            background-color: #f6f8fa;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        li {
+            margin: 8px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-right: 5px;
+        }
+        
+        .badge-success {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .badge-warning {
+            background-color: #ffc107;
+            color: #333;
+        }
+        
+        .badge-danger {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        code {
+            background-color: #f6f8fa;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 13px;
+            color: #e83e8c;
+        }
+        
+        pre {
+            background-color: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #24292e;
+        }
+        
+        .summary-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #0366d6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .summary-box strong {
+            color: #0366d6;
+        }
+        
+        .problem-box {
+            background-color: #fff5e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .fix-box {
+            background-color: #e8f5e9;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        
+        .impact {
+            color: #586069;
+            font-size: 14px;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .download-section {
+            background-color: #f6f8fa;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .file-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .file-list li {
+            padding: 10px;
+            margin: 5px 0;
+            background-color: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .file-name {
+            font-weight: 600;
+            color: #0366d6;
+        }
+        
+        .file-size {
+            color: #586069;
+            font-size: 13px;
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid #e1e4e8;
+            margin: 30px 0;
+        }
+        
+        .principle-list {
+            background-color: #e7f3ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .principle-list li {
+            margin: 10px 0;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Skills 质量检查工作总结</h1>
+        
+        <div class="meta">
+            <p><strong>检查时间：</strong>2026年5月11日-12日</p>
+            <p><strong>检查人员：</strong>马贝</p>
+            <p><strong>检查范围：</strong>8个糖尿病照护相关 Skills 文件</p>
+        </div>
+
+        <h2>一、检查概况</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Skills 名称</th>
+                    <th>版本</th>
+                    <th>检查结果</th>
+                    <th>处理</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>yutang_app_guide</td>
+                    <td>v1</td>
+                    <td><span class="badge badge-success">✅ 无问题</span></td>
+                    <td>无需修改</td>
+                </tr>
+                <tr>
+                    <td>safety_guard</td>
+                    <td>v1</td>
+                    <td><span class="badge badge-success">✅ 无问题</span></td>
+                    <td>无需修改</td>
+                </tr>
+                <tr>
+                    <td>lab_and_exam_report_interpretation</td>
+                    <td>v3</td>
+                    <td><span class="badge badge-success">✅ 无问题</span></td>
+                    <td>无需修改</td>
+                </tr>
+                <tr>
+                    <td>weight_interpretation</td>
+                    <td>v4</td>
+                    <td><span class="badge badge-warning">⚠️ 有遗漏</span></td>
+                    <td>修改后升级为 v5</td>
+                </tr>
+                <tr>
+                    <td>family_blood_pressure_interpretation</td>
+                    <td>v4</td>
+                    <td><span class="badge badge-danger">❌ 有矛盾</span></td>
+                    <td>修改后升级为 v5</td>
+                </tr>
+                <tr>
+                    <td>bgm_operation_guide</td>
+                    <td>v3</td>
+                    <td><span class="badge badge-warning">⚠️ 表述不精确 + 产品特性缺失</span></td>
+                    <td>修改后升级为 v4</td>
+                </tr>
+                <tr>
+                    <td>cgm_operation_guide</td>
+                    <td>v3</td>
+                    <td><span class="badge badge-danger">❌ 有矛盾</span></td>
+                    <td>修改后升级为 v4</td>
+                </tr>
+                <tr>
+                    <td>special_exercise_guidance</td>
+                    <td>v4</td>
+                    <td><span class="badge badge-warning">⚠️ 单位本地化缺失</span></td>
+                    <td>修改后升级为 v5</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="summary-box">
+            <p><strong>总结：</strong></p>
+            <ul>
+                <li><strong>3个 Skills 无问题</strong>，内容准确、一致、完整</li>
+                <li><strong>5个 Skills 需要修改</strong>，已完成修改并升级版本号</li>
+            </ul>
+        </div>
+
+        <h2>二、无问题 Skills（3个）</h2>
+
+        <h3>2.1 yutang_app_guide_v1（与糖App使用指导）</h3>
+        <p><strong>检查结果：✅ 通过</strong></p>
+        <ul>
+            <li>✅ 内部一致性：6个关键信息点（服务时间、登录规则、设备绑定、数据范围、积分抵扣、试纸购买）在不同文件中表述一致</li>
+            <li>✅ 知识完整性：覆盖App主要功能，包括血糖测量、体征记录、照护服务、商城购买等</li>
+            <li>✅ 与其他Skills协调：与CGM、血糖仪、饮食Skills的边界清晰，无冲突</li>
+        </ul>
+
+        <h3>2.2 safety_guard_v1（安全守护）</h3>
+        <p><strong>检查结果：✅ 通过</strong></p>
+        <ul>
+            <li>✅ 内部一致性：5类威胁分类（T1-T5）、严重等级划分（🔴🟡🟢）、回应原则在4个ref文件中完全一致</li>
+            <li>✅ 设计质量：组合触发规则（关键词+意图双重判断）避免误触发，185行正反对照示例实操性强</li>
+            <li>✅ 防御深度：覆盖直接注入、角色扮演、翻译/小说外壳、文本自称特权、多轮诱导等攻击类型</li>
+        </ul>
+
+        <h3>2.3 lab_and_exam_report_interpretation_v3（检查化验报告解读）</h3>
+        <p><strong>检查结果：✅ 通过</strong></p>
+        <ul>
+            <li>✅ 无知识矛盾：各文件之间信息一致，没有互相冲突的表述</li>
+            <li>✅ 药物与检验关联：全面覆盖胰岛素、二甲双胍、SGLT-2、GLP-1RA、ACEI/ARB、他汀等药物</li>
+            <li>✅ OCR风险识别：详细说明阴阳性识反、单位丢失、错行等常见问题</li>
+        </ul>
+
+        <h2>三、需要修改的 Skills（5个）</h2>
+
+        <h3>3.1 weight_interpretation_v4 → v5（体重解读）</h3>
+        <p><strong>问题类型：遗漏关键阈值</strong></p>
+
+        <h4>问题描述</h4>
+        <div class="problem-box">
+            <p>多次提到"腰围"和"体脂"作为评估指标，但未提供具体的判断标准；OCR风险中提到单位混淆，但未明确kg/斤换算关系。</p>
+        </div>
+
+        <h4>修改内容</h4>
+        
+        <div class="fix-box">
+            <p><strong>修改1：补充腰围阈值标准</strong></p>
+            <p>在 <code>refs/weight_status_interpretation.md</code> 的 BMI 标准后增加中国成人腰围常用阈值：</p>
+            <ul>
+                <li>男性：<code>≥90 cm</code></li>
+                <li>女性：<code>≥85 cm</code></li>
+            </ul>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改2：补充体脂率参考范围</strong></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>性别</th>
+                        <th>正常范围</th>
+                        <th>超重</th>
+                        <th>肥胖</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>男性</td>
+                        <td><code>10-20%</code></td>
+                        <td><code>20-25%</code></td>
+                        <td><code>&gt;25%</code></td>
+                    </tr>
+                    <tr>
+                        <td>女性</td>
+                        <td><code>18-28%</code></td>
+                        <td><code>28-35%</code></td>
+                        <td><code>&gt;35%</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改3：补充kg/斤换算说明</strong></p>
+            <p>在 <code>refs/ocr_and_measurement_check.md</code> 的"常见OCR风险"部分增加：<strong>1 kg = 2 斤（市斤）</strong>，患者常搞混</p>
+        </div>
+
+        <p class="impact"><strong>影响范围：</strong>2个文件，新增23行内容，修改1行表述</p>
+
+        <hr>
+
+        <h3>3.2 family_blood_pressure_interpretation_v4 → v5（家庭血压解读）</h3>
+        <p><strong>问题类型：内部表述矛盾（2处）</strong></p>
+
+        <h4>矛盾1：测量次数不一致</h4>
+        <div class="problem-box">
+            <p><strong>问题描述：</strong></p>
+            <ul>
+                <li><code>measurement_basics.md</code>：建议"测 2-3 次，间隔约 1 分钟"</li>
+                <li><code>follow_up_plan.md</code>：记录"每次两次读数"</li>
+                <li>⚠️ 一个说2-3次，一个说2次，标准不统一</li>
+            </ul>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改内容：</strong></p>
+            <ul>
+                <li>文件：<code>refs/follow_up_plan.md</code> 第15行</li>
+                <li>原表述：<code>每次两次读数</code></li>
+                <li>新表述：<code>每次 2-3 次读数</code></li>
+            </ul>
+            <p><strong>修改原因：</strong>统一为"至少2次，理想3次"，与规范测量要求一致，避免混淆。</p>
+        </div>
+
+        <h4>矛盾2：手臂位置对血压的影响方向错误</h4>
+        <div class="problem-box">
+            <p><strong>问题描述：</strong></p>
+            <ul>
+                <li><code>variability_and_errors.md</code> 第12行：说"手臂没放平，低于或高于心脏水平" → 量高了</li>
+                <li><code>variability_and_errors.md</code> 第17行：说"手臂位置偏高" → 量低了</li>
+                <li>⚠️ 自相矛盾，实际应为：手臂高于心脏→测值偏低；手臂低于心脏→测值偏高</li>
+            </ul>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改内容：</strong></p>
+            <ul>
+                <li>"量高了"原因：<code>手臂低于心脏水平</code></li>
+                <li>"量低了"原因：<code>手臂高于心脏水平</code></li>
+            </ul>
+            <p><strong>修改原因：</strong>修正生理学错误，手臂位置影响血压是因为重力和静水压原理。</p>
+        </div>
+
+        <p class="impact"><strong>影响范围：</strong>2个文件，修改3处表述</p>
+
+        <hr>
+
+        <h3>3.3 bgm_operation_guide_v3 → v4（血糖仪操作指导）</h3>
+        <p><strong>问题类型：表述不够精确 + 产品特性说明缺失</strong></p>
+
+        <h4>问题1：数据补传表述不够精确</h4>
+        <div class="problem-box">
+            <p>原表述先说"不支持"，后面又说"照护师可以补传"，逻辑矛盾</p>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改：</strong>明确为"<strong>患者端</strong>不支持手动上传"，并说明与糖App照护师也完全不可补传；共同照护App照护师可通过web端帮患者补传</p>
+        </div>
+
+        <h4>问题2：缺少产品核心特性说明</h4>
+        <div class="problem-box">
+            <p>文档未明确说明 BG1S 血糖仪<strong>无数字显示屏</strong>，不支持屏幕读数</p>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改：</strong></p>
+            <ul>
+                <li>在产品说明处增加：<strong>BG1S 血糖仪不支持屏幕显示数据，测量结果只能通过手机 APP 查看</strong></li>
+                <li>在"查看结果"部分明确说明：BG1S 血糖仪无数字显示屏，结果只能在手机 APP 上查看</li>
+            </ul>
+        </div>
+
+        <p class="impact"><strong>影响范围：</strong>2个文件，修改3处表述</p>
+
+        <hr>
+
+        <h3>3.4 cgm_operation_guide_v3 → v4（CGM操作指导）</h3>
+        <p><strong>问题类型：内部矛盾（2处）</strong></p>
+
+        <h4>矛盾1：客服电话不一致</h4>
+        <div class="problem-box">
+            <p>微泰客服电话在不同文件中信息不一致（一处只有1个号码，另一处有2个号码）</p>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改：</strong>统一为 <code>微泰→4000-831-811 / 4000-811-831</code></p>
+        </div>
+
+        <h4>矛盾2：MRI/CT/X射线处理要求不一致</h4>
+        <div class="problem-box">
+            <p>不同产品的移除要求强度不一致（CGM3说"必须移除"，微泰说CT/X射线"建议移除"）</p>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改：</strong>统一安全标准，所有CGM产品在进行<strong>MRI/CT/X射线检查前都必须移除</strong></p>
+            <p>修改了 skill.md 三处地方，确保患者和医护人员遵循统一的安全操作规范</p>
+        </div>
+
+        <p class="impact"><strong>影响范围：</strong>1个文件，修改3处表述</p>
+
+        <hr>
+
+        <h3>3.5 special_exercise_guidance_v4 → v5（特殊需求运动指导）</h3>
+        <p><strong>问题类型：单位本地化缺失</strong></p>
+
+        <div class="problem-box">
+            <p>关于高血糖运动风险的说明仅使用美制单位 mg/dL，中国患者和照护师常用 mmol/L，容易造成误解</p>
+        </div>
+
+        <div class="fix-box">
+            <p><strong>修改：</strong></p>
+            <ul>
+                <li>原表述：<code>&gt;250-300 mg/dL</code></li>
+                <li>新表述：<code>&gt;13.9-16.7 mmol/L（&gt;250-300 mg/dL）</code></li>
+            </ul>
+            <p><strong>修改原因：</strong>明确两种单位换算关系，避免患者因单位不熟悉而误判风险</p>
+        </div>
+
+        <p class="impact"><strong>影响范围：</strong>1个文件，修改1行表述</p>
+
+        <hr>
+
+        <h2>四、修改质量保证</h2>
+        
+        <div class="principle-list">
+            <p><strong>所有修改均遵循以下原则：</strong></p>
+            <ol>
+                <li>✅ <strong>只修改问题点</strong>，其他内容完全不动</li>
+                <li>✅ <strong>保持原有格式</strong>，不改变文档结构</li>
+                <li>✅ <strong>明确标准来源</strong>，如中国成人标准、生理学原理、产品说明书</li>
+                <li>✅ <strong>逐一验证修改</strong>，修改后立即查看确认</li>
+                <li>✅ <strong>升级版本号</strong>，修改后的文件版本号递增</li>
+            </ol>
+        </div>
+
+        <h2>五、交付成果</h2>
+
+        <div class="download-section">
+            <ul class="file-list">
+                <li>
+                    <span class="file-name">weight_interpretation_v5.zip</span>
+                    <span class="file-size">9.6K | 补充腰围阈值、体脂率范围、kg/斤换算</span>
+                </li>
+                <li>
+                    <span class="file-name">family_blood_pressure_interpretation_v5.zip</span>
+                    <span class="file-size">10K | 修正测量次数和手臂位置矛盾</span>
+                </li>
+                <li>
+                    <span class="file-name">bgm_operation_guide_v4.zip</span>
+                    <span class="file-size">9.6K | 修正数据补传表述 + 补充产品无屏幕特性说明</span>
+                </li>
+                <li>
+                    <span class="file-name">cgm_operation_guide_v4.zip</span>
+                    <span class="file-size">11K | 统一客服电话和检查要求</span>
+                </li>
+                <li>
+                    <span class="file-name">special_exercise_guidance_v5.zip</span>
+                    <span class="file-size">8.4K | 血糖单位本地化（mg/dL → mmol/L）</span>
+                </li>
+            </ul>
+        </div>
+
+        <h2>六、检查方法说明</h2>
+        
+        <p><strong>本次检查采用的方法：</strong></p>
+        <ol>
+            <li><strong>内部一致性验证：</strong>交叉比对同一Skill中不同ref文件的重复信息点</li>
+            <li><strong>逻辑完整性检查：</strong>识别关键概念是否有具体标准和判断依据</li>
+            <li><strong>表述准确性评估：</strong>核对专业术语、数值标准、因果关系是否符合医学常识</li>
+        </ol>
+
+        <hr style="margin-top: 50px;">
+        
+        <p style="text-align: center; color: #586069; font-size: 14px;">
+            检查完成时间：2026年5月12日<br>
+            工作耗时：约7小时<br>
+            质量等级：8个Skills中3个优秀/良好，5个修改后达标
+        </p>
+    </div>
+</body>
+</html>
